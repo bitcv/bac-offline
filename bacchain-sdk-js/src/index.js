@@ -437,6 +437,10 @@ bacchainSdk.prototype.getBlockByHeight = function(id) {
 }
 
 
+bacchainSdk.prototype.generateRandomMnemonic = function() {
+    return bip39.generateMnemonic(256);
+}
+
 module.exports = {
 	newBacchainSdk: newBacchainSdk
 }
