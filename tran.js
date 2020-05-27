@@ -6,8 +6,10 @@
  *
  *  node tran.js  "bac1anp8qzj4welr3ydqnfyhmnarxjwqk0vrhuca7n" "bac1hzpytmhedn302fgygsmxn67sq4lc90kcv5cvmn"  "0.001" "bac"
  *
+ *  pill mouse frost skull shoe desk voyage whisper call burst imitate blood plunge adapt scene neglect humor good pole print amazing early conduct consider
+ *
  */
-const bacchainjs = require("./bacchain-sdk-js/src/index");
+const bacchainjs = require("./bacchain-sdk/bacchain-sdk-js/src/index");
 const chainId = "bacchain-mainnet-1.0";
 const lcdUrl = "http://52.69.196.169:1317";
 const bacchainSdk = bacchainjs.newBacchainSdk(lcdUrl, chainId)
@@ -45,7 +47,7 @@ if(accAddr != fromAddr){
 
 var main = async () => {
     var txhash = await sendTx()
-    await  sleep(6000)
+    await  sleep(8000)
     var  txInfo = await bacchainSdk.getTxInfoByHash(txhash)
     console.log("交易hash:")
     console.log(txhash)
@@ -55,11 +57,9 @@ var main = async () => {
 }
 
 
-async   function sendTx(){
-    
+async function sendTx(){
 
-    var data =  await  bacchainSdk.getAccounts(fromAddr)
-
+    var data =     await  bacchainSdk.getAccounts(fromAddr)
     var txInfo = {
         type: "bacchain/MsgSend",
         from_address :fromAddr,
@@ -67,8 +67,8 @@ async   function sendTx(){
         amountDenom: "nbac",
         amount: amount,
         feeDenom: "nbac",
-        fee: 2000000,
-        gas: 2000000,
+        fee: 100000000,
+        gas: 100000000,
         memo: "",
         account_number: data.value.account_number,
         sequence: data.value.sequence
@@ -76,7 +76,7 @@ async   function sendTx(){
 
     var  stdSignMsg = bacchainSdk.NewStdMsg(txInfo);
     var signedTx = bacchainSdk.sign(stdSignMsg, ecpairPriv);
-    var data =  await  bacchainSdk.broadcast(signedTx)
+    var data =   await  bacchainSdk.broadcast(signedTx)
     var txHash = data['txhash']
     return txHash
 }

@@ -1,0 +1,3 @@
+[submodule "bacchain-sdk"]
+	path = bacchain-sdk
+	url = https://github.com/bitcv/bacchain-sdk.git
